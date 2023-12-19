@@ -47,6 +47,14 @@ function emailIsValid($email)
     ];
 }
 
+function nomIsValid($nom){
+
+}
+
+function prenomIsValid($prenom){
+    
+}
+
 function pwdLenghtValidation($pwd)
 {
     //minimum 6 max 16

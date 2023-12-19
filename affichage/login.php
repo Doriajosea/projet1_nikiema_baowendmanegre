@@ -13,7 +13,7 @@
         <form method="post" action="../valide/loginValid.php">
 
 
-            <label for="nom">Adresse Couriel : </label>
+            <label for="nom">Email : </label>
             <input id="nom" type="text" name="nom" value=""> <br> <br>
 
             <label for="pwd">Mot de passe</label>
