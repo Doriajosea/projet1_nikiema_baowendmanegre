@@ -47,12 +47,45 @@ function emailIsValid($email)
     ];
 }
 
-function nomIsValid($nom){
+function nomIsValid($lname){
+    //minimum 6 max 16
+    $length = strlen($lname);
 
+    if ($length < 2) {
+        return [
+            'isValid' => false,
+            'msg' => 'Votre nom est trop court'
+        ];
+    } elseif ($length > 20) {
+        return [
+            'isValid' => false,
+            'msg' => 'Votre nom est trop long. Doit être inférieur a 20 caractères'
+        ];
+    }
+    return [
+        'isValid' => true,
+        'msg' => ''
+    ];
 }
 
-function prenomIsValid($prenom){
-    
+function prenomIsValid($fname){
+    $length = strlen($fname);
+
+    if ($length < 2) {
+        return [
+            'isValid' => false,
+            'msg' => 'Votre prenom est trop court'
+        ];
+    } elseif ($length > 20) {
+        return [
+            'isValid' => false,
+            'msg' => 'Votre prenom est trop long. Doit être inférieur a 20 caractères'
+        ];
+    }
+    return [
+        'isValid' => true,
+        'msg' => ''
+    ];
 }
 
 function pwdLenghtValidation($pwd)

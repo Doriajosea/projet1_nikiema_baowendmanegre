@@ -62,11 +62,7 @@ function changeToken($data) {
 }
 
 
-/**
- * Get user by id
- */
 
- //Todo: edit to prepare
 function getUserById(int $id)
 {
     global $conn;
@@ -90,9 +86,7 @@ function getUserByUsername(string $user_name)
     return $data;
 }
 
-/**
- * Update user
- */
+
 function updateUser(array $data)
 {
     global $conn;

@@ -46,14 +46,14 @@ if (isset($_POST)) {
     if (isset($_POST["user_name"])) {
         $validfnom = prenomIsValid($_POST["fname"]);
  
-        if ($validfname['isValid'] == false) {
+        if ($validfnom['isValid'] == false) {
             $fieldIsValid = false;
         }
     }
     if (isset($_POST["user_name"])) {
         $validprenom = nomIsValid($_POST["lname"]);
  
-        if ($validlname['isValid'] == false) {
+        if ($validprenom['isValid'] == false) {
             $fieldIsValid = false;
             // die("je die dans mon valid Lname");
         }
@@ -85,8 +85,8 @@ if (isset($_POST)) {
             'user_name' => $validUserName['msg'],
             'email' => $validEmail['msg'],
             'pwd' => $validpwd['msg'],
-            'fname' => $validfname['msg'],
-            'lname' => $validlname['msg']
+            'fname' => $validfnom['msg'],
+            'lname' => $validprenom['msg']
  
         ];
         $url = '../affichage/signup.php';
