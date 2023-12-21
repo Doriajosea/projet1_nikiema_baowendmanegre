@@ -14,20 +14,9 @@
         <?php
             session_start();
             //var_dump($_SESSION);
-
-            $nom = '';
-            if (isset($_SESSION['signup_form']['nom'])) {
-                $nom = $_SESSION['signup_form']['nom'];
-            }
-
-            $prenom = '';
-            if (isset($_SESSION['signup_form']['prenom'])) {
-                $prenom = $_SESSION['signup_form']['prenom'];
-            }
-
             $user_name = '';
             if (isset($_SESSION['signup_form']['user_name'])) {
-                $user_name = $_SESSION['signup_form']['user_name'];
+            $user_name = $_SESSION['signup_form']['user_name'];
             }
 
             $email = '';
@@ -35,10 +24,20 @@
                 $email = $_SESSION['signup_form']['email'];
             }
 
+
             $pwd = '';
             if (isset($_SESSION['signup_form']['pwd'])) {
                 $pwd = $_SESSION['signup_form']['pwd'];
             }
+            $fname = '';
+            if (isset($_SESSION['signup_form']['fname'])) {
+                $fname = $_SESSION['signup_form']['fname'];
+            }
+            $lname = '';
+            if (isset($_SESSION['signup_form']['lname'])) {
+                $lname = $_SESSION['signup_form']['lname'];
+            }
+
 
 
             if(isset($_POST['submit'])) {
@@ -63,29 +62,13 @@
 
         <!-- Chaque formulaire a sa page de résultats -->
         <!-- Todo : changer les types pour validation front -->
-        <form method="post" action="../valide/signupValid.php">
-
-
-            <div>
-                <label for="nom">Nom : </label>
-                <input id="nom" type="text" name="nom" value="<?php echo $nom ?>">
-                <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['email'])? $_SESSION['signup_errors']['email'] : '' ?></p>
-
-            </div>
-
-            <div>
-                <label for="prenom">Prenom : </label>
-                <input id="prenom" type="text" name="prenom" value="<?php echo $prenom ?>">
-                <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['prenom'])? $_SESSION['signup_errors']['prenom'] : '' ?></p>
-
-            </div>
+        <form method="post" action="../valide/signupResul.php">
 
             <div>
                 <label for="user_name">Nom d'utilisateur</label>
                 <input id="user_name" type="text" name="user_name" value="<?php echo $user_name ?>">
                 <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['user_name'])? $_SESSION['signup_errors']['user_name'] : '' ?></p>
             </div>
-
             <div>
             <label for="email">Courriel : </label>
             <input id="email" type="text" name="email" value="<?php echo $email ?>">
@@ -93,11 +76,26 @@
 
             </div>
             <div>
-            <label for="pwd">Mot de passe : </label>
-            <input id="pwd" type="text" name="pwd" value="<?php echo $pwd ?>">
-            <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['pwd'])? $_SESSION['signup_errors']['pwd'] : '' ?></p>
-        
+                <label for="pwd">Mot de passe : </label>
+                <input id="pwd" type="text" name="pwd" value="<?php echo $pwd ?>">
+                <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['pwd'])? $_SESSION['signup_errors']['pwd'] : '' ?></p>
+            
             </div>
+
+            <div>
+                    <label for="fname">Prenom : </label>
+                    <input id="fname" type="text" name="fname" value="<?php echo $fname ?>">
+                    <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['fname'])? $_SESSION['signup_errors']['fname'] : '' ?></p>
+
+            </div>
+
+            <div>
+                <label for="lname">Nom : </label>
+                <input id="lname" type="text" name="lname" value="<?php echo $lname ?>">
+                <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['lname'])? $_SESSION['signup_errors']['lname'] : '' ?></p>
+
+            </div>
+
             
             
             <button type="submit">Soumettre mon enregistrement</button>

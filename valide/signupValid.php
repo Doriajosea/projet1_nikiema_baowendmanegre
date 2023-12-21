@@ -12,6 +12,7 @@ session_start();
 // si les données ne sont pas bonne : renvoyer vers le form d'enregistrement (redirect auto )
 // attention on veut récupérer les données rentrées précédement : $_SESSION
 
+var_dump($_POST);
 
 
 
@@ -26,8 +27,8 @@ if (isset($_POST)) {
     // valid user name
     if (isset($_POST['user_name'])) {
         $nameIsValidData = usernameIsValid($_POST['user_name']);
-
         if ($nameIsValidData['isValid'] == false) {
+            var_dump("Erruer dans username");
             $fieldValidation = false;
         }
     }
@@ -37,6 +38,8 @@ if (isset($_POST)) {
         $emailIsValidData = emailIsValid($_POST['email']);
 
         if ($emailIsValidData['isValid'] == false) {
+            var_dump("Erruer dans email");
+
             $fieldValidation = false;
         }
     }
@@ -45,6 +48,8 @@ if (isset($_POST)) {
         $pwdIsValidData = pwdLenghtValidation($_POST['pwd']);
 
         if ($pwdIsValidData['isValid'] == false) {
+            var_dump("Erruer dans pwd");
+
             $fieldValidation = false;
         }
     }

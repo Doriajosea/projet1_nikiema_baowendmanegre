@@ -1,10 +1,12 @@
-[13:57] Diane Uwera
+<a href="../">Accueil</a>
 <?php
 require_once "../functions/encode.php";
 require_once "../functions/validation.php";
 require_once "../conn/connexion.php";
 require_once "../functions/userCrud.php";
 session_start();
+var_dump($_POST);
+
  
 if (isset($_POST)) {
  
@@ -17,6 +19,7 @@ if (isset($_POST)) {
         $validUserName = userNameIsValid($_POST["user_name"]);
  
         if ($validUserName['isValid'] == false) {
+            var_dump("Erruer dans username");
             $fieldIsValid = false;
             // die("je die dans mon valid UserName");
         }
@@ -41,14 +44,14 @@ if (isset($_POST)) {
     }
 
     if (isset($_POST["user_name"])) {
-        $validfnom = nomIsValid($_POST["nom"]);
+        $validfnom = prenomIsValid($_POST["fname"]);
  
         if ($validfname['isValid'] == false) {
             $fieldIsValid = false;
         }
     }
     if (isset($_POST["user_name"])) {
-        $validprenom = prenomIsValid($_POST["prenom"]);
+        $validprenom = nomIsValid($_POST["lname"]);
  
         if ($validlname['isValid'] == false) {
             $fieldIsValid = false;
@@ -67,8 +70,8 @@ if (isset($_POST)) {
             'pwd' => $encodedPwd,
             'fname' => $_POST['fname'],
             'lname' => $_POST['lname'],
-            'billing_address_id' => 1,
-            'shipping_address_id' => 1,
+            'billing_address_id' => 0,
+            'shipping_address_id' => 0,
             'token' => "",
             'role_id' => 3
         ];
@@ -86,12 +89,12 @@ if (isset($_POST)) {
             'lname' => $validlname['msg']
  
         ];
-        $url = '../pages/signup.php';
+        $url = '../affichage/signup.php';
         header('Location: ' . $url);
     }
 } else {
     //redirect to the  signup
-    $url = '../pages/signup.php';
+    $url = '../affichage/signup.php';
     header('Location: ' . $url);
 }
  

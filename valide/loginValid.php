@@ -14,7 +14,7 @@ if (isset($_POST)) {
 
     //vérifier si username dans DB
     if (!empty($_POST['user_name'])) {
-       // $userData = getUserByUsername($_POST['user_name']);
+       $userData = getUserByUsername($_POST['user_name']);
     } else {
         //Erreur rien entré
         //redirect vers login
@@ -25,11 +25,20 @@ if (isset($_POST)) {
     
     //si l'utilisateur exist dans la DB
     if ($userData) {
-        // comparer pwd avec DB (version encodée)
-       // $enteredPwdEncoded = encodePwd($_POST['pwd']);
+        
+       $enteredPwdEncoded = encodePwd($_POST['pwd']);
+       $data =[
+        'id'=>$userData['id'],
+        'token'=>$token
+       ];
+       $ajouterToken = changeToken($data);
         if ($userData['pwd'] == $enteredPwdEncoded) {
-            //traitement si mdp correct
-            //créeer un token
+            $_SESSION['auth']=[
+                'id'=>$userData['id'],
+                'role_id'=>$userData['role_id'],
+                'token'=>$token
+            ];
+
             $token = hash('sha256', random_bytes(32));
             echo '</br></br>Mon token : </br>';
             
@@ -38,16 +47,10 @@ if (isset($_POST)) {
 
             echo "C'est le bon mdp ";
         }else {
-            //traitement si mdp incorrect
-            //compter lenombre d'erreur et bloquer l'IP apres 3 erreur
-            //Les erreurs peuvent etre dans une Session
-            //Proposer de réinitialiser le mdp
-            //Créer un msg d'erreur
-            //renvoyer sur la page login
             echo "C'est pas le bon mdp ";        }
     }
 } else {
-    //redirect vers login
+    //redirige vers login
     $url = '../index.php';
     header('Location: ' . $url);
 }

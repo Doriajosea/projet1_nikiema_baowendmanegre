@@ -4,25 +4,27 @@
 function createUser(array $data)
 {
     global $conn;
-    
-    $query = "INSERT INTO user VALUES (NULL,?,?,?,?,?,?,?,?,?)";
+
+
+     var_dump("Je suis dans mon create user");
+    $query = "INSERT INTO `user` ( `user_name`, `email`, `pwd`, `fname`, `lname`, `billing_address_id`, `shipping_address_id`, `token`, `role_id`) VALUES (?,?,?,?,?,1,1,?,3)";
  
     if ($stmt = mysqli_prepare($conn, $query)) {
  
         mysqli_stmt_bind_param(
             $stmt,
-            "sssssiisi",
+            "ssssss",
             $data['user_name'],
             $data['email'],
             $data['pwd'],
             $data['nom'],
             $data['prenom'],
-            $data['billing_address_id'],
-            $data['shipping_address_id'],
             $data['token'],
-            $data['role_id'],
         );
         $result = mysqli_stmt_execute($stmt);
+
+        var_dump(mysqli_error ($conn));
+        die;
     }
 }
 /**
@@ -42,6 +44,24 @@ function getAllUsers()
 
     return $data;
 }
+
+function changeToken($data) {
+    global $conn;
+    $query = 'UPDATE user set token =? where user.id =?;';
+    if ($stmt= mysqli_prepare($conn,$query)) {
+        mysqli_stmt_bind_param(
+            $stmt,
+            'si',
+            $data['id'],
+            $data['token'],
+        );
+        $result=mysqli_stmt_execute($stmt);
+    }
+
+
+}
+
+
 /**
  * Get user by id
  */
