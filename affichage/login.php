@@ -17,7 +17,7 @@
             <input id="nom" type="text" name="nom" value=""> <br> <br>
 
             <label for="pwd">Mot de passe</label>
-            <input id="pwd" type="text" name="pwd" value=""> <br> <br>
+            <input id="pwd" type="password" name="pwd" value=""> <br> <br>
             
 
             <button type="submit">Me connecter</button>

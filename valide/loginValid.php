@@ -4,11 +4,32 @@
 
 require_once '../functions/userCrud.php';
 require_once '../functions/validation.php';
-// require_once '../utils/connexion.php';
+require_once '../conn/connexion.php';
+require_once '../functions/encode.php';
+
+
 
 var_dump($_POST);
 
 //Authentification
+
+
+// Nom d'utilisateur à vérifier
+$user_name_verif = "le_nom_utilisateur_que_vous_voulez_verifier";
+
+
+$sql = "SELECT * FROM user WHERE user_name = '$user_name_verif'";
+$result = mysqli_query($conn, $sql);
+
+// Vérifier si la requête a renvoyé des résultats
+if (mysqli_num_rows($result) > 0) {
+    // L'utilisateur existe dans la base de données
+    echo "L'utilisateur existe.";
+} else {
+    // L'utilisateur n'existe pas dans la base de données
+    echo "L'utilisateur n'existe pas.";
+}
+
 
 if (isset($_POST)) {
 
@@ -16,8 +37,7 @@ if (isset($_POST)) {
     if (!empty($_POST['user_name'])) {
        $userData = getUserByUsername($_POST['user_name']);
     } else {
-        //Erreur rien entré
-        //redirect vers login
+        
         $url = '../affichage/login.php';
         header('Location: ' . $url);
     }

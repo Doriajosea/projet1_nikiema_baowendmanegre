@@ -56,10 +56,10 @@ function nomIsValid($lname){
             'isValid' => false,
             'msg' => 'Votre nom est trop court'
         ];
-    } elseif ($length > 20) {
+    } elseif ($length > 50) {
         return [
             'isValid' => false,
-            'msg' => 'Votre nom est trop long. Doit être inférieur a 20 caractères'
+            'msg' => 'Votre nom est trop long. Doit être inférieur a 50 caractères'
         ];
     }
     return [

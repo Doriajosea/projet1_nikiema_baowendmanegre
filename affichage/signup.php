@@ -62,7 +62,7 @@
 
         <!-- Chaque formulaire a sa page de résultats -->
         <!-- Todo : changer les types pour validation front -->
-        <form method="post" action="../valide/signupResul.php">
+        <form method="post" action="../valide/signupValid.php">
 
             <div>
                 <label for="user_name">Nom d'utilisateur</label>
@@ -77,7 +77,7 @@
             </div>
             <div>
                 <label for="pwd">Mot de passe : </label>
-                <input id="pwd" type="text" name="pwd" value="<?php echo $pwd ?>">
+                <input id="pwd" type="password" name="pwd" value="<?php echo $pwd ?>">
                 <p style="color: red; font-size: 0.8rem;"><?php echo isset($_SESSION['signup_errors']['pwd'])? $_SESSION['signup_errors']['pwd'] : '' ?></p>
             
             </div>

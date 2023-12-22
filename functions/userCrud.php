@@ -17,8 +17,8 @@ function createUser(array $data)
             $data['user_name'],
             $data['email'],
             $data['pwd'],
-            $data['nom'],
-            $data['prenom'],
+            $data['lname'],
+            $data['fname'],
             $data['token'],
         );
         $result = mysqli_stmt_execute($stmt);
@@ -27,9 +27,7 @@ function createUser(array $data)
         die;
     }
 }
-/**
- * Get all users
- */
+
 function getAllUsers()
 {
     global $conn;
