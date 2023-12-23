@@ -118,7 +118,6 @@ if (isset($_POST)) {
  
         if ($validfname['isValid'] == false) {
             $fieldIsValid = false;
-            // die("je die dans mon valid Fname");
         }
     }
     if (isset($_POST["user_name"])) {
@@ -126,11 +125,13 @@ if (isset($_POST)) {
  
         if ($validlname['isValid'] == false) {
             $fieldIsValid = false;
-            // die("je die dans mon valid Lname");
         }
     }
- $token = hash('sha256', random_bytes(32));
-    if ($fieldIsValid == true) {
+ 
+ 
+       $token = hash('sha256', random_bytes(32));
+    
+       if ($fieldIsValid == true) {
         //envoyer à la DB
  
         $encodedPwd = encodePwd($_POST['pwd']);
@@ -150,7 +151,9 @@ if (isset($_POST)) {
         
         $_SESSION["session_token"] = $token;
         $newUser = createUser($data);
-    } else {
+    } 
+    else 
+    {
         // redirect to signup and give errors message
         $_SESSION['signup_errors'] = [
             'user_name' => $validUserName['msg'],
@@ -163,15 +166,31 @@ if (isset($_POST)) {
         $url = '../affichage/signup.php';
         header('Location: ' . $url);
     }
-} else {
-    //redirect to the  signup
-    $url = '../affichage/signup.php';
-    header('Location: ' . $url);
 }
- 
+    else 
+    {
+        //redirect to the  signup
+        $url = '../affichage/signup.php';
+        header('Location: ' . $url);
+    }
+
+    $url = '../affichage/login.php';
+    header('Location: ' . $url);
+    
+
 ?>
 
-<a href="../produit/pageProduits.php">
+<!-- <a href="../produit/pageProduits.php">
     <button>Valider mes informations</button>
-</a>
-<a href="../index.php">Return to the page Accueil</a>
+</a> -->
+<a href="../affichage/login.php">Return to the page Accueil</a>
+
+<a href="../">Accueil</a>
+
+<?php 
+
+$url = '../affichage/login.php';
+header('Location: ' . $url);
+
+?>
+

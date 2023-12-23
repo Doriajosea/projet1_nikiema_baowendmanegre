@@ -21,7 +21,6 @@ if (isset($_POST)) {
         if ($validUserName['isValid'] == false) {
             var_dump("Erruer dans username");
             $fieldIsValid = false;
-            // die("je die dans mon valid UserName");
         }
     }
  
@@ -30,7 +29,6 @@ if (isset($_POST)) {
  
         if ($validEmail['isValid'] == false) {
             $fieldIsValid = false;
-            // die("je die dans mon valid Email");
         }
     }
  
@@ -39,7 +37,6 @@ if (isset($_POST)) {
  
         if ($validpwd['isValid'] == false) {
             $fieldIsValid = false;
-            //die("je die dans mon valid pwd");
         }
     }
 
@@ -99,4 +96,11 @@ if (isset($_POST)) {
 }
  
 ?>
-<a href="../index.php">Return to the page Accueil</a>
+<a href="../affichage/login.php">Return to the page Accueil</a>
+
+<?php 
+
+$url = '../affichage/login.php';
+header('Location: ' . $url);
+
+?>

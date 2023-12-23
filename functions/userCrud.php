@@ -89,8 +89,7 @@ function updateUser(array $data)
 {
     global $conn;
 
-    $query = "UPDATE user SET user_name = ?, email = ?, pwd = ?
-            WHERE user.id = ?;";
+    $query = "UPDATE user SET user_name = ?, email = ?, pwd = ? WHERE user.id = ?;";
 
     if ($stmt = mysqli_prepare($conn, $query)) {
 
@@ -103,13 +102,54 @@ function updateUser(array $data)
             $data['id'],
         );
 
-        /* Exécution de la requête */
         $result = mysqli_stmt_execute($stmt);
     }
 }
-/**
- * Delete user
- */
+
+
+function updateUserbyAdmin($user_id, $data)
+{
+    global $conn;
+
+    $query = "UPDATE user SET email = ?, pwd = ?, fname = ?, lname = ?, user_name = ? WHERE id = ?";
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sssssi",
+            $data['email'],
+            $data['pwd'],
+            $data['fname'],
+            $data['lname'],
+            $data['user_name'],
+            $user_id
+        );
+
+        // Execution of the query
+        $result = mysqli_stmt_execute($stmt);
+        return $result;
+    }
+
+    return false;
+}
+
+
+function updateUserAddresses($conn, $userID, $billingAddressID, $shippingAddressID) {
+    // Update the user's billing address ID
+    $updateBillingAddressID = mysqli_prepare($conn, "UPDATE user SET billing_address_id = ? WHERE user.id = ?");
+    mysqli_stmt_bind_param($updateBillingAddressID, 'ii', $billingAddressID, $userID);
+    mysqli_stmt_execute($updateBillingAddressID);
+
+    // Update the user's shipping address ID
+    $updateShippingAddressID = mysqli_prepare($conn, "UPDATE user SET shipping_address_id = ? WHERE user.id = ?");
+    mysqli_stmt_bind_param($updateShippingAddressID, 'ii', $shippingAddressID, $userID);
+    mysqli_stmt_execute($updateShippingAddressID);
+
+    mysqli_stmt_close($updateBillingAddressID);
+    mysqli_stmt_close($updateShippingAddressID);
+}
+
+
+
 function deleteUser(int $id)
 {
     global $conn;
@@ -129,3 +169,49 @@ function deleteUser(int $id)
         $result = mysqli_stmt_execute($stmt);
     }
 }
+
+
+
+function updateUserToken($userId, $token) {
+    global $conn;
+    $sql = "UPDATE user SET token = '$token' WHERE id = $userId";
+    mysqli_query($conn, $sql);
+
+}
+
+
+
+function updateUserRole($user_id, $new_role_id)
+{
+    global $conn;
+
+    $query = "UPDATE user SET role_id = ? WHERE id = ?";
+    
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        mysqli_stmt_bind_param($stmt, "ii", $new_role_id, $user_id);
+
+        
+        $result = mysqli_stmt_execute($stmt);
+        return $result;
+    }
+
+    return false; 
+}
+
+
+function getClients()
+{
+    global $conn;
+
+    $query = "SELECT * FROM user WHERE role_id = 3"; 
+    $result = mysqli_query($conn, $query);
+
+    $clients = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $clients[] = $row;
+    }
+
+    return $clients;
+}
+

@@ -9,7 +9,9 @@ require_once '../functions/encode.php';
 
 
 
-var_dump($_POST);
+session_start();
+
+
 
 //Authentification
 
@@ -42,6 +44,7 @@ if (isset($_POST)) {
         header('Location: ' . $url);
     }
 
+    $token = hash('sha256', random_bytes(32));
     
     //si l'utilisateur exist dans la DB
     if ($userData) {
@@ -79,9 +82,43 @@ if (isset($_POST)) {
 
 
 
+// session_start();
 
+// // Vérifier si le formulaire a été soumis
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     // Récupérer les données du formulaire
+//     $email = $_POST["e"];
+//     $password = $_POST["pwd"];
 
+//     // Valider l'utilisateur dans la base de données
+//     if (usernameIsValid($email, $password)) {
+//         // L'utilisateur est valide, rediriger vers la page souhaitée
+//         header("Location: ../produit/pageProduits.php"); // Remplacez avec le chemin de votre page
+//         exit();
+//     } else {
+//         // L'utilisateur n'est pas valide, afficher un message d'erreur
+//         $_SESSION["error_message"] = "Identifiants incorrects. Veuillez réessayer.";
+//         header("Location: ../affichage/login.php"); // Rediriger vers la page de formulaire
+//         exit();
+//     }
+// } else {
+//     // Rediriger si le formulaire n'a pas été soumis
+//     header("Location: ../affichage/login.php");
+//     exit();
+// }
 
+// // Fonction pour valider l'utilisateur dans la base de données
+// function validateUser($email, $password) {
+//     // Vous devez implémenter cette fonction en fonction de votre logique d'authentification
+//     // Assurez-vous de sécuriser les requêtes SQL (par exemple, utilisez des requêtes préparées)
+//     // Retournez true si l'utilisateur est valide, sinon false
+//     // Exemple simplifié :
+//     $validUser = false;
 
+//     // Connectez-vous à la base de données et exécutez une requête pour vérifier l'utilisateur
+//     // ...
 
-?>
+//     return $validUser;
+// }
+// ?>
+
